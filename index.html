@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="스토리캔버스 - 나와 우리의 이야기를 그림책으로 남기다. 그림책 상호작용과 맞춤형 창작 워크숍을 통해 시니어의 삶을 예술로 기록하는 서비스입니다." />
+  <title>스토리캔버스 (StoryCanvas) — 나와 우리의 이야기를 그림책으로 남기다</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- 헤더 / 네비게이션 -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+
+      <!-- 로고 -->
+      <a href="#" class="header__logo">
+        <span class="logo__mark">S</span>
+        <span class="logo__text">스토리캔버스<span class="logo__sub">StoryCanvas</span></span>
+      </a>
+
+      <!-- 데스크톱 네비게이션 -->
+      <nav class="nav" id="nav" aria-label="주 메뉴">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="#about">스토리캔버스 소개</a></li>
+          <li><a class="nav__link" href="#why">왜 지금 스토리캔버스인가</a></li>
+          <li><a class="nav__link" href="#services">서비스</a></li>
+          <li><a class="nav__link" href="#partnership">파트너십</a></li>
+          <li><a class="nav__link" href="#team">팀 소개</a></li>
+          <li><a class="nav__link" href="#contact">문의하기</a></li>
+        </ul>
+      </nav>
+
+      <!-- 소셜 아이콘 + 햄버거 -->
+      <div class="header__right">
+        <div class="header__social" aria-label="소셜 링크">
+          <!-- Instagram -->
+          <!-- TODO: 추후 입력 — 인스타그램 URL -->
+          <a href="#" target="_blank" rel="noopener noreferrer" class="social-btn social-btn--instagram"
+            aria-label="인스타그램 바로가기">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="6" stroke="currentColor" stroke-width="1.8" />
+              <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8" />
+              <circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" />
+            </svg>
+          </a>
+          <!-- Naver Blog -->
+          <!-- TODO: 추후 입력 — 블로그 URL -->
+          <a href="#" target="_blank" rel="noopener noreferrer" class="social-btn social-btn--naver"
+            aria-label="네이버 블로그 바로가기">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="24" height="24" rx="5" fill="currentColor" />
+              <path d="M6.5 17V7h3.1l3.9 6.05V7H16.5v10h-3.08L9.5 10.97V17H6.5z" fill="white" />
+            </svg>
+          </a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="메뉴 열기" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- 모바일 메뉴 -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <ul class="mobile-menu__list">
+      <li><a class="mobile-menu__link" href="#about">스토리캔버스 소개</a></li>
+      <li><a class="mobile-menu__link" href="#why">왜 지금 스토리캔버스인가</a></li>
+      <li><a class="mobile-menu__link" href="#services">서비스</a></li>
+      <li><a class="mobile-menu__link" href="#partnership">파트너십</a></li>
+      <li><a class="mobile-menu__link" href="#team">팀 소개</a></li>
+      <li><a class="mobile-menu__link" href="#contact">문의하기</a></li>
+    </ul>
+    <div class="mobile-menu__social">
+      <!-- TODO: 추후 입력 — 인스타그램 URL -->
+      <a href="#" target="_blank" rel="noopener noreferrer" class="social-btn social-btn--instagram" aria-label="인스타그램">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="6" stroke="currentColor" stroke-width="1.8" />
+          <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8" />
+          <circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" />
+        </svg>
+        <span>인스타그램</span>
+      </a>
+      <!-- TODO: 추후 입력 — 블로그 URL -->
+      <a href="#" target="_blank" rel="noopener noreferrer" class="social-btn social-btn--naver" aria-label="네이버 블로그">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="24" height="24" rx="5" fill="currentColor" />
+          <path d="M6.5 17V7h3.1l3.9 6.05V7H16.5v10h-3.08L9.5 10.97V17H6.5z" fill="white" />
+        </svg>
+        <span>네이버 블로그</span>
+      </a>
+    </div>
+  </div>
+  <div class="overlay" id="overlay"></div>
+
+  <main>
+
+    <!-- 히어로 섹션 -->
+    <section class="hero" id="hero">
+
+      <!-- 배경 장식 레이어 (aria-hidden) -->
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__orb hero__orb--1"></div>
+        <div class="hero__orb hero__orb--2"></div>
+        <div class="hero__orb hero__orb--3"></div>
+        <!-- 추상 링 SVG -->
+        <svg class="hero__rings" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="300" cy="300" r="220" stroke="#1a2e4a" stroke-width="1" stroke-dasharray="6 10" opacity=".07" />
+          <circle cx="300" cy="300" r="160" stroke="#c9a84c" stroke-width="1" stroke-dasharray="4 14" opacity=".1" />
+          <circle cx="300" cy="300" r="100" stroke="#1a2e4a" stroke-width="1.5" opacity=".05" />
+        </svg>
+      </div>
+
+      <!-- 메인 콘텐츠 -->
+      <div class="container hero__inner">
+        <div class="hero__content">
+
+          <!-- 아이브로우 뱃지 -->
+          <div class="hero__eyebrow hero-anim hero-anim--1">
+            <span class="hero__eyebrow-dot" aria-hidden="true"></span>
+            그림책 창작 워크숍 서비스
+          </div>
+
+          <!-- 메인 헤드라인 -->
+          <h1 class="hero__title hero-anim hero-anim--2">
+            나와 우리의 이야기를<br />그림책으로 <em>남기다</em>
+          </h1>
+
+          <!-- 서브 헤드라인 -->
+          <p class="hero__desc hero-anim hero-anim--3">
+            그림책으로 나누는 이야기, 함께 만드는 따뜻한 기억.<br class="hero__br" />
+            시니어의 삶을 예술로 기록하는 맞춤형 창작 워크숍 서비스입니다.
+          </p>
+
+          <!-- CTA 버튼 -->
+          <div class="hero__actions hero-anim hero-anim--4">
+            <a href="#contact" class="btn btn--gold btn--lg hero__cta-primary">
+              서비스 문의하기
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </a>
+            <a href="#services" class="btn btn--ghost btn--lg">서비스 알아보기</a>
+          </div>
+
+
+        </div>
+      </div>
+
+      <!-- 스크롤 유도 -->
+      <div class="hero__scroll-cue hero-anim hero-anim--6" aria-hidden="true">
+        <div class="hero__scroll-mouse">
+          <div class="hero__scroll-wheel"></div>
+        </div>
+        <span>스크롤</span>
+      </div>
+
+      <!-- 하단 웨이브 전환 -->
+      <div class="hero__wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 72" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,36 C240,72 480,0 720,36 C960,72 1200,0 1440,36 L1440,72 L0,72 Z" fill="#ffffff" />
+        </svg>
+      </div>
+
+    </section>
+
+    <!-- 소개 섹션 -->
+    <section class="section about" id="about">
+      <div class="container">
+
+        <!-- 섹션 헤더 -->
+        <div class="section__header">
+          <span class="section__label">스토리캔버스 소개</span>
+          <h2 class="section__title">나와 우리의 이야기를<br />그림책으로 남깁니다</h2>
+          <p class="section__desc">스토리캔버스는 그림책 상호작용과 맞춤형 창작 워크숍을 통해 시니어의 이야기를 예술로 남기는 서비스입니다.</p>
+        </div>
+
+        <!-- 2컬럼 분할: 텍스트(좌) / 이미지(우) -->
+        <div class="about__split">
+
+          <!-- 좌: 사명 & 비전 텍스트 -->
+          <div class="about__text-col">
+            <h3 class="about__subtitle">스토리캔버스란</h3>
+            <p class="about__body">
+              스토리캔버스는 그림책 상호작용과 맞춤형 창작 워크숍을 통해
+              시니어의 이야기를 예술로 남기는 서비스입니다.
+            </p>
+
+            <h3 class="about__subtitle">스토리캔버스가 만들고 싶은 세상</h3>
+            <p class="about__body">
+              사랑하는 사람들과의 추억이 있고,<br />
+              남기고 싶은 이야기가 있고,<br />
+              평범한 사람들의 삶의 흔적이 있는 세상
+            </p>
+
+            <!-- 핵심 가치 지표 -->
+            <div class="about__meta">
+              <div class="about__meta-item">
+                <strong>그림책</strong>
+                <span>상호작용</span>
+              </div>
+              <div class="about__meta-divider" aria-hidden="true"></div>
+              <div class="about__meta-item">
+                <strong>창작</strong>
+                <span>워크숍</span>
+              </div>
+              <div class="about__meta-divider" aria-hidden="true"></div>
+              <div class="about__meta-item">
+                <strong>예술</strong>
+                <span>기록</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 우: 이미지 플레이스홀더 -->
+          <div class="about__img-col">
+            <!-- 배경 도트 패턴 -->
+            <div class="about__dots" aria-hidden="true"></div>
+
+            <div class="about__img-wrap">
+              <img src="./assets/images/notes.jpeg" alt="스토리캔버스 그림책 워크숍" class="about__img-single" />
+            </div>
+          </div>
+
+        </div><!-- /.about__split -->
+
+        <!-- 3 가치 카드 -->
+        <div class="about__values" aria-label="핵심 가치">
+
+          <!-- 신뢰 -->
+          <div class="value-card">
+            <div class="value-card__icon-wrap">
+              <img src="./assets/images/story.jpeg" alt="이야기" class="value-card__img" />
+            </div>
+            <h3 class="value-card__title">이야기</h3>
+            <p class="value-card__desc">
+              모든 시니어의 삶에는 들어야 할 이야기가 있습니다.
+              스토리캔버스는 그 이야기가 잊히지 않도록 함께 기록합니다.
+            </p>
+          </div>
+
+          <!-- 예술 -->
+          <div class="value-card">
+            <div class="value-card__icon-wrap">
+              <img src="./assets/images/art.jpeg" alt="예술" class="value-card__img" />
+            </div>
+            <h3 class="value-card__title">예술</h3>
+            <p class="value-card__desc">
+              그림책이라는 예술 언어로 평범한 삶을 특별하게 기록합니다.
+              누구나 자신만의 작가가 될 수 있습니다.
+            </p>
+          </div>
+
+          <!-- 연결 -->
+          <div class="value-card">
+            <div class="value-card__icon-wrap">
+              <img src="./assets/images/communication.jpeg" alt="연결" class="value-card__img" />
+            </div>
+            <h3 class="value-card__title">연결</h3>
+            <p class="value-card__desc">
+              시니어와 지역사회, 세대와 세대를 그림책으로 연결합니다.
+              함께 만드는 이야기는 고립을 넘어 공동체를 만듭니다.
+            </p>
+          </div>
+
+        </div><!-- /.about__values -->
+
+      </div>
+    </section>
+
+    <!-- 왜 지금 스토리캔버스인가 섹션 -->
+    <section class="section" id="why">
+      <div class="container">
+
+        <div class="section__header">
+          <span class="section__label">왜 지금 스토리캔버스인가</span>
+          <h2 class="section__title">대한민국,<br />초고령사회에 진입하다</h2>
+          <p class="section__desc">시니어 마인드 케어가 필요한 지금, 스토리캔버스가 그림책으로 답합니다.</p>
+        </div>
+
+        <!-- 주요 통계 -->
+        <div class="stats__grid">
+          <div class="feature-item">
+            <div class="feature-item__tag">20.03%</div>
+            <h3 class="feature-item__title">고령인구 비율</h3>
+            <p class="feature-item__desc">전체 인구의 20.03%가 고령인구입니다. 65세 이상 인구는 1,025만 6,782명(2024년 12월 31일 기준)으로, 대한민국은
+              공식적으로 초고령사회에 진입했습니다.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__tag">40.7%</div>
+            <h3 class="feature-item__title">사회적 고립도</h3>
+            <p class="feature-item__desc">시니어 10명 중 4명이 사회적 고립을 경험합니다. 경기도 노인우울증 치료비지원사업 이용자는 191명(2022년)에서
+              2,860명(2024년)으로 급증했습니다.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__tag">18.8%</div>
+            <h3 class="feature-item__title">여가생활 만족도</h3>
+            <p class="feature-item__desc">60세 이상 여가생활 만족도는 고작 18.8%에 불과합니다. 반면 지역소속감은 82.9%로 높아, 연결과 참여 기반의 여가 활동이 절실히
+              필요합니다.</p>
+          </div>
+        </div>
+
+        <!-- 시니어가 여가활동을 원하는 이유 -->
+        <div class="section__header" style="margin-top:3rem;">
+          <h3 class="section__title" style="font-size:1.5rem;">시니어가 여가활동을 원하는 이유</h3>
+        </div>
+        <div class="reasons__grid">
+          <div class="feature-item">
+            <div class="feature-item__tag">01</div>
+            <h3 class="feature-item__title">마음을 느긋하게</h3>
+            <p class="feature-item__desc">마음을 잠시동안 느긋하게 하고, 무료함에서 벗어나고 싶어서</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__tag">02</div>
+            <h3 class="feature-item__title">성취와 인정</h3>
+            <p class="feature-item__desc">할 수 있다는 것을 남에게 보이고, 내가 노력한 결과를 보고 싶어서</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__tag">03</div>
+            <h3 class="feature-item__title">연결과 창조</h3>
+            <p class="feature-item__desc">다른 사람과 함께하고, 새로운 우정을 형성하고, 창조력을 키우기 위해</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 서비스 섹션 -->
+    <section class="section services" id="services">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__label">서비스</span>
+          <h2 class="section__title">그림책으로 잇는<br />세 가지 이야기</h2>
+          <p class="section__desc">스토리캔버스는 그림책을 매개로 시니어의 삶을 기록하고, 연결하고, 세상에 알립니다.</p>
+        </div>
+        <div class="services__grid">
+          <div class="service-card">
+            <div class="service-card__icon">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="22" fill="#e8eef5" />
+                <path d="M15 18h18M15 24h12M15 30h8" stroke="#1a2e4a" stroke-width="2.5" stroke-linecap="round" />
+                <circle cx="36" cy="30" r="6" fill="#c9a84c" opacity=".8" />
+                <path d="M33 30l2 2 4-4" stroke="white" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <h3 class="service-card__title">그림책 상호작용</h3>
+            <p class="service-card__desc">그림책을 매개로 시니어의 고립감을 해소하고, 또래 스토리텔러로 사회에 기여하는 활동을 지원합니다.</p>
+            <ul class="service-card__list">
+              <li>상호작용을 통한 고립감 해소</li>
+              <li>또래 스토리텔러로 사회 공헌</li>
+              <li>주제별 키트 판매</li>
+            </ul>
+          </div>
+          <div class="service-card">
+            <div class="service-card__icon">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="22" fill="#e8eef5" />
+                <rect x="13" y="14" width="16" height="20" rx="2" stroke="#1a2e4a" stroke-width="2.5" />
+                <path d="M29 14v20" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round" />
+                <path d="M17 20h8M17 25h6" stroke="#1a2e4a" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+            </div>
+            <h3 class="service-card__title">그림책 &amp; 굿즈 창작</h3>
+            <p class="service-card__desc">시니어의 이야기를 그림책으로 직접 창작하는 워크숍을 통해 자기표현과 수익성을 동시에 실현합니다.</p>
+            <ul class="service-card__list">
+              <li>그림책 창작으로 자기표현</li>
+              <li>종이책 / 디지털책 제작</li>
+              <li>그림책 / 굿즈 만들기 프로그램</li>
+              <li>또래 그림책 스토리텔러 양성</li>
+              <li>찾아가는 그림책 자동차</li>
+            </ul>
+          </div>
+          <div class="service-card">
+            <div class="service-card__icon">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="22" fill="#e8eef5" />
+                <rect x="12" y="20" width="24" height="16" rx="2" stroke="#1a2e4a" stroke-width="2.5" />
+                <path d="M18 20v-4a6 6 0 0 1 12 0v4" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round" />
+                <path d="M24 27v3" stroke="#1a2e4a" stroke-width="2.5" stroke-linecap="round" />
+              </svg>
+            </div>
+            <h3 class="service-card__title">문화기획전시</h3>
+            <p class="service-card__desc">시니어 작가의 원화를 전시하여 예술문화에 기여하고, 창작 활동을 통해 자아통합감을 향상시킵니다.</p>
+            <ul class="service-card__list">
+              <li>원화 전시로 예술문화 공헌</li>
+              <li>자아통합감 향상</li>
+              <li>프로그램 운영으로 수익성 확보</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 차별성 섹션 -->
+    <section class="section features" id="differentiation">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__label">차별성</span>
+          <h2 class="section__title">스토리 캔버스</h2>
+          <p class="section__desc">스토리 캔버스란, 나만의 이야기를 그림책 구조로 자유롭게 펼칠 수 있는 스토리캔버스의 창작 프레임워크입니다.</p>
+        </div>
+        <div class="comparison__grid">
+          <div class="features__legacy-group">
+            <div class="feature-item feature-item--legacy">
+              <div class="feature-item__num">기존</div>
+              <h3 class="feature-item__title">빈 칸 채우기식 인생노트</h3>
+              <p class="feature-item__desc">정해진 양식에 단순히 채워 넣는 방식으로, 창의적 자기표현의 폭이 제한됩니다.</p>
+            </div>
+            <div class="feature-item feature-item--legacy">
+              <div class="feature-item__num">기존</div>
+              <h3 class="feature-item__title">이야기 구조가 필요한 그림책</h3>
+              <p class="feature-item__desc">전문 작가 수준의 이야기 구성 능력이 요구되어 진입 장벽이 높습니다.</p>
+            </div>
+          </div>
+          <div class="features__arrow features__arrow--highlight" aria-hidden="true">→</div>
+          <div class="feature-item feature-item--highlight">
+            <div class="feature-item__num">스토리캔버스</div>
+            <h3 class="feature-item__title">함께 만드는 그림책</h3>
+            <p class="feature-item__desc">개인·공동 창작 생산활동으로, 단순히 채우는 기록이 아닌 함께 만들어가는 이야기. 스토리캔버스는 개인과 공동의 창작 경험을 삶의
+              유산으로 남깁니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 파트너십 섹션 -->
+    <section class="section" id="partnership">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__label">파트너십</span>
+          <h2 class="section__title">함께하는<br />파트너들</h2>
+          <p class="section__desc">스토리캔버스는 그림책 생태계의 다양한 파트너들과 함께합니다.</p>
+        </div>
+        <div class="partners__grid">
+
+          <div class="feature-item">
+            <div class="feature-item__tag">강사</div>
+            <h3 class="feature-item__title">강사 수급 인력풀</h3>
+            <p class="feature-item__desc">그림책윤연구소 / 나비꿈그림책연구소 / 북앤리터러시연구소 / 생애진로행복연구소 / 협동조합</p>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__tag">협동</div>
+            <h3 class="feature-item__title">협동조합</h3>
+            <p class="feature-item__desc">사회적협동조합 그림책도시 / 사회적협동조합 슬슬 / 리터리시 협동조합</p>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__tag">협회</div>
+            <h3 class="feature-item__title">협회 / 학회</h3>
+            <p class="feature-item__desc">한국그림책문화기획자협회 / 한국독서학회 / 한국독서치료학회 / 한국북큐레이터협회 / 한국웰다잉교육협회 / 한국아동문학 콘텐츠협회</p>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__tag">교구</div>
+            <h3 class="feature-item__title">시니어 교구</h3>
+            <p class="feature-item__desc">실버벨에듀</p>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__tag">사업</div>
+            <h3 class="feature-item__title">시니어 사업 협업</h3>
+            <p class="feature-item__desc">인지온 / 애드모아</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 팀 소개 섹션 -->
+    <section class="section team" id="team">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__label">팀 소개</span>
+          <h2 class="section__title">스토리캔버스를 만드는<br />사람들</h2>
+        </div>
+        <div class="team__grid">
+
+          <!-- 정은경 — 대표 -->
+          <article class="team-card">
+            <div class="team-card__header">
+              <div class="team-card__name-row">
+                <h3 class="team-card__name">정은경</h3>
+                <span class="team-card__role">대표</span>
+              </div>
+            </div>
+            <div class="team-card__body">
+              <div class="team-card__section">
+                <span class="team-card__section-label">학력</span>
+                <p class="team-card__section-text">가톨릭대일반대학원 독서학전공<br />한국방송통신대학교대학원 평생교육학과 재학 중</p>
+              </div>
+              <div class="team-card__section">
+                <span class="team-card__section-label">자격</span>
+                <ul class="team-card__chips">
+                  <li class="team-card__chip">그림책라이프코치</li>
+                  <li class="team-card__chip">시니어브레인트레이닝지도사</li>
+                  <li class="team-card__chip">실버책놀이지도사</li>
+                  <li class="team-card__chip">웰다잉강사지도사</li>
+                  <li class="team-card__chip">실버인지지도사 1급</li>
+                </ul>
+              </div>
+              <div class="team-card__section">
+                <span class="team-card__section-label">경력</span>
+                <ul class="team-card__list">
+                  <li class="team-card__list-item">월곶행복건강센터 그림책강의 (2025~)</li>
+                  <li class="team-card__list-item">경기도 작은도서관 활동가대상 역량강화과정 그림책활용교육 (2022, 2023)</li>
+                  <li class="team-card__list-item">시흥여성새로일하기지원본부 재취업연계 교육 강사 (2024~)</li>
+                </ul>
+              </div>
+              <div class="team-card__extras">
+                <div class="team-card__extra-item">
+                  <span class="team-card__extra-label">저서</span>
+                  <span class="team-card__extra-text">작은도서관 운영자를 위한 그림책독서활동레시피</span>
+                </div>
+                <div class="team-card__extra-item">
+                  <span class="team-card__extra-label">수상</span>
+                  <span class="team-card__extra-text">2024 용인시 소셜벤처 경연대회 우수상</span>
+                </div>
+                <div class="team-card__extra-item">
+                  <span class="team-card__extra-label">수료</span>
+                  <span class="team-card__extra-text">중앙대학교행정대학원 ESG전문인력양성교육과정, 표준고위과정</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 박묘경 — 홍보 -->
+          <article class="team-card">
+            <div class="team-card__header">
+              <div class="team-card__name-row">
+                <h3 class="team-card__name">박묘경</h3>
+                <span class="team-card__role">홍보</span>
+              </div>
+            </div>
+            <div class="team-card__body">
+              <div class="team-card__section">
+                <span class="team-card__section-label">학력</span>
+                <p class="team-card__section-text">경북대학교 농화학과<br />한국방송통신대학교 국문학과</p>
+              </div>
+              <div class="team-card__section">
+                <span class="team-card__section-label">자격</span>
+                <ul class="team-card__chips">
+                  <li class="team-card__chip">평생교육사 2급</li>
+                  <li class="team-card__chip">문해지도사</li>
+                  <li class="team-card__chip">실버인지지도사 2급</li>
+                </ul>
+              </div>
+              <div class="team-card__section">
+                <span class="team-card__section-label">경력</span>
+                <ul class="team-card__list">
+                  <li class="team-card__list-item">경기봄날학교 성인 문해 국어교사 (2024~)</li>
+                  <li class="team-card__list-item">상갈주민자치센터 문해교사 (2012~)</li>
+                  <li class="team-card__list-item">원삼농협 여성농업인센터 문해교사 (2009~2017)</li>
+                  <li class="team-card__list-item">시니어 그림책 시화지도</li>
+                  <li class="team-card__list-item">경기평생학습관 문해교육담당자 워크숍 강사</li>
+                </ul>
+              </div>
+              <div class="team-card__extras">
+                <div class="team-card__extra-item">
+                  <span class="team-card__extra-label">수상</span>
+                  <span class="team-card__extra-text">용인시 표창장 / 평생교육지도자 (2017)</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 김관숙 — 교육 -->
+          <article class="team-card">
+            <div class="team-card__header">
+              <div class="team-card__name-row">
+                <h3 class="team-card__name">김관숙</h3>
+                <span class="team-card__role">교육</span>
+              </div>
+            </div>
+            <div class="team-card__body">
+              <div class="team-card__section">
+                <span class="team-card__section-label">학력</span>
+                <p class="team-card__section-text">중앙대학교 문헌정보학</p>
+              </div>
+              <div class="team-card__section">
+                <span class="team-card__section-label">강의분야</span>
+                <ul class="team-card__chips">
+                  <li class="team-card__chip">인성</li>
+                  <li class="team-card__chip">소통</li>
+                  <li class="team-card__chip">스토리텔링</li>
+                  <li class="team-card__chip">그림책</li>
+                  <li class="team-card__chip">독서·토론·글쓰기</li>
+                  <li class="team-card__chip">진로·커리어</li>
+                  <li class="team-card__chip">생애설계</li>
+                  <li class="team-card__chip">부모감정코칭</li>
+                  <li class="team-card__chip">긍정심리</li>
+                  <li class="team-card__chip">미술심리치료</li>
+                  <li class="team-card__chip">웰다잉</li>
+                  <li class="team-card__chip">인권·다문화</li>
+                </ul>
+              </div>
+              <div class="team-card__section">
+                <span class="team-card__section-label">경력</span>
+                <ul class="team-card__list">
+                  <li class="team-card__list-item">KBS 리포터·구성작가 (1988~2005)</li>
+                  <li class="team-card__list-item">선거연수원 초빙교수 (2015~현재)</li>
+                  <li class="team-card__list-item">경기도 여성가족재단 전문강사 (2019~현재)</li>
+                  <li class="team-card__list-item">경기도 일자리재단 일생활균형 전문가 위원 (2019~현재)</li>
+                  <li class="team-card__list-item">서울경제신문 라이프점프 칼럼 필진 (2023~현재)</li>
+                  <li class="team-card__list-item">중소벤처기업연수원 교육강사 (2023~현재)</li>
+                  <li class="team-card__list-item">공기업 채용 전문 면접위원 (2023~현재)</li>
+                  <li class="team-card__list-item">한국장애인개발원 인권교육 강사 (2023~현재)</li>
+                </ul>
+              </div>
+              <div class="team-card__extras">
+                <div class="team-card__extra-item">
+                  <span class="team-card__extra-label">공공기관</span>
+                  <span class="team-card__extra-text">선거연수원 / 통계청 / 국방부 / 한겨레신문사 / 중소벤처기업연수원</span>
+                </div>
+                <div class="team-card__extra-item">
+                  <span class="team-card__extra-label">교육기관</span>
+                  <span class="team-card__extra-text">경기도교육청 / 의정부·포천교육지원청 / 다산학교 / 몽실학교 / 국립청소년디딤학교</span>
+                </div>
+                <div class="team-card__extra-item">
+                  <span class="team-card__extra-label">복지기관</span>
+                  <span class="team-card__extra-text">노인복지관 / 장애인개발원 / 시흥시일자리센터 / 여성새로일하기본부</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 이승윤 — 기획 -->
+          <article class="team-card">
+            <div class="team-card__header">
+              <div class="team-card__name-row">
+                <h3 class="team-card__name">이승윤</h3>
+                <span class="team-card__role">기획</span>
+              </div>
+            </div>
+            <div class="team-card__body">
+              <div class="team-card__section">
+                <span class="team-card__section-label">학력</span>
+                <p class="team-card__section-text">동신대 환경위생학과</p>
+              </div>
+              <div class="team-card__section">
+                <span class="team-card__section-label">자격</span>
+                <ul class="team-card__chips">
+                  <li class="team-card__chip">기후변화전문가 1급</li>
+                  <li class="team-card__chip">산림교육전문가</li>
+                  <li class="team-card__chip">웰다잉강사지도사</li>
+                  <li class="team-card__chip">도시농업관리사</li>
+                  <li class="team-card__chip">천연비누/아로마테라피강사</li>
+                </ul>
+              </div>
+              <div class="team-card__section">
+                <span class="team-card__section-label">경력</span>
+                <ul class="team-card__list">
+                  <li class="team-card__list-item">광교생태환경체험교육관 강사 (2025~)</li>
+                  <li class="team-card__list-item">숲과 나눔 생태교육 강사 (2023~)</li>
+                  <li class="team-card__list-item">용인시 기후변화체험교육센터 환경교육</li>
+                </ul>
+              </div>
+              <div class="team-card__extras">
+                <div class="team-card__extra-item">
+                  <span class="team-card__extra-label">저서</span>
+                  <span class="team-card__extra-text">공정여행 마을로 용인여행책자 공저</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 문의 섹션 -->
+    <section class="section contact" id="contact">
+      <div class="container contact__inner">
+
+        <!-- ── 왼쪽: 네이비 정보 카드 ── -->
+        <div class="contact__info-card">
+          <span class="contact__info-label">문의하기</span>
+          <h2 class="contact__info-title">궁금한 점이<br />있으신가요?</h2>
+          <p class="contact__info-text">
+            그림책 워크숍, 파트너십, 강사 파견 등 어떤 내용이든 편하게
+            남겨주세요. 담당자가 빠르게 연락드립니다.
+          </p>
+
+          <!-- 연락 채널 -->
+          <ul class="contact__channels">
+            <li class="contact__channel">
+              <div class="contact__channel-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                </svg>
+              </div>
+              <div>
+                <strong>전화 상담</strong>
+                <!-- TODO: 추후 입력 — 대표전화 -->
+                <a href="tel:"><!-- TODO: 추후 입력 --></a>
+                <span>평일 09:00 – 18:00</span>
+              </div>
+            </li>
+            <li class="contact__channel">
+              <div class="contact__channel-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.8" />
+                  <polyline points="2,4 12,13 22,4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                </svg>
+              </div>
+              <div>
+                <strong>이메일</strong>
+                <!-- TODO: 추후 입력 — 대표 이메일 / 알림 이메일 -->
+                <a href="mailto:"><!-- TODO: 추후 입력 --></a>
+              </div>
+            </li>
+            <li class="contact__channel">
+              <div class="contact__channel-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="11" r="3" stroke="currentColor" stroke-width="1.8" />
+                  <path d="M12 2a9 9 0 0 1 9 9c0 6.075-9 13-9 13S3 17.075 3 11a9 9 0 0 1 9-9z" stroke="currentColor"
+                    stroke-width="1.8" />
+                </svg>
+              </div>
+              <div>
+                <strong>주소</strong>
+                <!-- TODO: 추후 입력 — 사업장 주소 -->
+                <span><!-- TODO: 추후 입력 --></span>
+              </div>
+            </li>
+          </ul>
+
+          <!-- 운영 시간 배지 -->
+          <div class="contact__hours">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8" />
+              <polyline points="12,6 12,12 16,14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+            영업일 기준 <strong>24시간 이내</strong> 답변
+          </div>
+
+          <!-- 배경 장식 -->
+          <div class="contact__info-deco" aria-hidden="true">
+            <svg viewBox="0 0 200 200" fill="none">
+              <circle cx="100" cy="100" r="80" stroke="rgba(255,255,255,.06)" stroke-width="1.5" />
+              <circle cx="100" cy="100" r="55" stroke="rgba(201,168,76,.12)" stroke-width="1.5"
+                stroke-dasharray="5 8" />
+              <circle cx="100" cy="100" r="30" stroke="rgba(255,255,255,.05)" stroke-width="1.5" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- ── 오른쪽: 폼 카드 ── -->
+        <div class="contact__form-card">
+
+          <!-- 폼 -->
+          <!--
+            TODO: 추후 입력 — 문의 알림 이메일
+            제출 방식: Google Apps Script → Google Sheets 저장
+            action 속성을 배포된 Google Apps Script URL로 교체하세요.
+          -->
+          <form class="contact__form" id="contact-form"
+            action="https://script.google.com/macros/s/AKfycbzRt2kf5VWmKhToQQTz6Iv8LNdYlljbFFliTcs3Hx-ZL6wvurl3qAptvH0n7ubJr9ziAw/exec"
+            method="POST" novalidate>
+            <div class="form-row">
+              <!-- 성함 -->
+              <div class="form-group">
+                <label for="name" class="form-label">
+                  성함 <span class="required" aria-hidden="true">*</span>
+                </label>
+                <input type="text" id="name" name="name" class="form-input" placeholder="홍길동" required
+                  autocomplete="name" aria-required="true" aria-describedby="err-name" />
+                <span class="form-error" id="err-name" role="alert"></span>
+              </div>
+
+              <!-- 연락처 -->
+              <div class="form-group">
+                <label for="phone" class="form-label">
+                  연락처 <span class="required" aria-hidden="true">*</span>
+                </label>
+                <input type="tel" id="phone" name="phone" class="form-input" placeholder="010-0000-0000" required
+                  autocomplete="tel" inputmode="numeric" aria-required="true" aria-describedby="err-phone" />
+                <span class="form-error" id="err-phone" role="alert"></span>
+              </div>
+            </div>
+
+            <!-- 이메일 (선택) -->
+            <div class="form-group">
+              <label for="email" class="form-label">
+                이메일
+                <span class="form-optional">선택</span>
+              </label>
+              <input type="email" id="email" name="email" class="form-input" placeholder="example@email.com"
+                autocomplete="email" aria-describedby="err-email" />
+              <span class="form-error" id="err-email" role="alert"></span>
+            </div>
+
+            <!-- 문의 내용 (선택) -->
+            <div class="form-group">
+              <label for="message" class="form-label">
+                문의 내용
+                <span class="form-optional">선택</span>
+              </label>
+              <textarea id="message" name="message" class="form-input form-textarea"
+                placeholder="그림책 워크숍, 파트너십, 강사 파견 등 궁금한 점을 자유롭게 적어주세요." rows="4" maxlength="500"
+                aria-describedby="msg-counter"></textarea>
+              <div class="form-textarea-footer">
+                <span class="form-error" id="err-message" role="alert"></span>
+                <span class="form-counter" id="msg-counter" aria-live="polite">0 / 500</span>
+              </div>
+            </div>
+
+            <!-- 개인정보 동의 -->
+            <div class="form-group form-group--checkbox">
+              <label class="checkbox-label">
+                <input type="checkbox" id="cf-agree" name="_agree" required aria-required="true" />
+                <span class="checkbox-custom" aria-hidden="true"></span>
+                <span class="checkbox-text">
+                  <a href="#" class="form-link">개인정보 처리방침</a>에 동의합니다.
+                  <span class="required" aria-hidden="true">*</span>
+                </span>
+              </label>
+              <span class="form-error" id="err-agree" role="alert"></span>
+            </div>
+
+            <!-- 제출 버튼 -->
+            <button type="submit" class="btn btn--gold btn--full" id="submit-btn">
+              <span class="btn__text">문의 남기기</span>
+              <span class="btn__loader" aria-hidden="true"></span>
+            </button>
+
+            <p id="form-message" class="form-message" aria-live="polite"></p>
+
+
+            <p class="form-note">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                <path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg>
+              영업일 기준 24시간 이내 담당자가 직접 연락드립니다.
+            </p>
+          </form>
+
+          <!-- 성공 메시지 -->
+          <div class="form-success" id="formSuccess" hidden aria-live="polite">
+            <div class="form-success__icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none">
+                <circle cx="32" cy="32" r="29" stroke="#c9a84c" stroke-width="2.5" />
+                <path d="M20 32l9 9 15-16" stroke="#c9a84c" stroke-width="3" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <h3 class="form-success__title" tabindex="-1">문의가 접수되었습니다.</h3>
+            <p class="form-success__body">
+              빠른 시일 내에 연락드리겠습니다.<br />
+              <span id="successName"></span>
+            </p>
+            <button type="button" class="btn btn--outline" id="resetFormBtn">
+              다시 문의하기
+            </button>
+          </div>
+
+        </div><!-- /.contact__form-card -->
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 푸터 -->
+  <footer class="footer" role="contentinfo">
+
+    <!-- ── 상단 본문: 브랜드 + 링크 컬럼 ── -->
+    <div class="container footer__body">
+
+      <!-- 브랜드 + 소셜 -->
+      <div class="footer__brand">
+        <a href="#" class="footer__logo" aria-label="스토리캔버스 홈으로">
+          <span class="logo__mark">S</span>
+          <span class="logo__text">스토리캔버스<span class="logo__sub">StoryCanvas</span></span>
+        </a>
+        <p class="footer__tagline">나와 우리의 이야기를<br />그림책으로 남기다</p>
+
+        <!-- 소셜 아이콘 -->
+        <div class="footer__social" aria-label="소셜 미디어">
+          <!-- Instagram -->
+          <!-- TODO: 추후 입력 — 인스타그램 URL -->
+          <a href="#" target="_blank" rel="noopener noreferrer" class="footer__social-btn" aria-label="인스타그램 바로가기">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="6" stroke="currentColor" stroke-width="1.7" />
+              <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.7" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+            </svg>
+          </a>
+          <!-- Naver Blog -->
+          <!-- TODO: 추후 입력 — 블로그 URL -->
+          <a href="#" target="_blank" rel="noopener noreferrer" class="footer__social-btn footer__social-btn--naver"
+            aria-label="네이버 블로그 바로가기">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect width="24" height="24" rx="5" fill="currentColor" />
+              <path d="M6.5 17V7h3.1l3.9 6.05V7H16.5v10h-3.08L9.5 10.97V17H6.5z" fill="white" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- 링크 컬럼 -->
+      <nav class="footer__links" aria-label="푸터 메뉴">
+        <div class="footer__col">
+          <h3 class="footer__col-heading">서비스</h3>
+          <ul>
+            <li><a href="#services">그림책 상호작용</a></li>
+            <li><a href="#services">그림책 &amp; 굿즈 창작</a></li>
+            <li><a href="#services">문화기획전시</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3 class="footer__col-heading">회사</h3>
+          <ul>
+            <li><a href="#about">스토리캔버스 소개</a></li>
+            <li><a href="#why">왜 지금 스토리캔버스인가</a></li>
+            <li><a href="#team">팀 소개</a></li>
+            <li><a href="#partnership">파트너십</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3 class="footer__col-heading">고객지원</h3>
+          <ul>
+            <li><a href="#contact">문의하기</a></li>
+            <li><a href="#contact">개인정보 처리방침</a></li>
+            <li><a href="#contact">이용약관</a></li>
+          </ul>
+        </div>
+      </nav>
+
+    </div><!-- /.footer__body -->
+
+    <!-- ── 사업자 정보 띠 ── -->
+    <div class="footer__biz-bar">
+      <div class="container">
+        <!--
+          아래 사업자 정보를 실제 정보로 교체하세요.
+          각 <dd> 안의 텍스트만 수정하면 됩니다.
+        -->
+        <dl class="footer__biz">
+          <div class="footer__biz-item">
+            <dt>상호</dt>
+            <dd>스토리 캔버스</dd>
+          </div>
+          <div class="footer__biz-item">
+            <dt>대표자</dt>
+            <dd>정은경</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- ── 저작권 바 ── -->
+    <div class="footer__copy-bar">
+      <div class="container footer__copy-inner">
+        <!-- TODO: 추후 입력 — 설립연도 확인 후 교체 -->
+        <p class="footer__copy">ⓒ <!-- TODO: 설립연도 --> 스토리캔버스(StoryCanvas). All rights reserved.</p>
+        <p class="footer__copy-note">본 사이트의 모든 콘텐츠는 저작권법의 보호를 받습니다.</p>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- 상단으로 버튼 -->
+  <button class="scroll-top" id="scrollTop" aria-label="맨 위로 이동">
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M18 15l-6-6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </svg>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
