@@ -59,7 +59,10 @@ def load_env_file(path=".env"):
 
 
 def get_credentials():
-    load_env_file()
+    # 현재 디렉터리와 스크립트 디렉터리 둘 다 시도
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    load_env_file(".env")
+    load_env_file(os.path.join(script_dir, ".env"))
     cid = os.environ.get("NAVER_CLIENT_ID")
     secret = os.environ.get("NAVER_CLIENT_SECRET")
     if not cid or not secret:
