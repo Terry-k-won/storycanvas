@@ -50,10 +50,25 @@ def _sign(timestamp, method, uri, secret):
     d = hmac.new(secret.encode(), msg.encode(), hashlib.sha256).digest()
     return base64.b64encode(d).decode()
 
-def get_keywords(keyword, api_key, secret_key, customer_id):
+# 병의원 도메인: 입력 키워드와 조합할 '의료 의도' 키워드
+MEDICAL_MODIFIERS = [
+    "병원", "의원", "클리닉", "치료", "시술", "수술", "증상", "원인",
+    "비용", "가격", "후기", "진료", "검사", "통증", "재활", "비급여",
+]
+
+# 병의원 도메인: 연관 키워드 필터링용 의료 어휘
+MEDICAL_VOCAB = set(MEDICAL_MODIFIERS) | {
+    "한의원", "성형", "피부과", "정형외과", "내과", "외과", "치과", "안과",
+    "이비인후과", "산부인과", "비뇨기과", "신경과", "정신과", "재활의학과",
+    "한방", "도수치료", "물리치료", "주사", "약", "실비", "보험", "예약",
+    "진단", "교정", "임플란트", "디스크", "협착증", "성형외과", "검진",
+    "통증의학과", "마취", "입원", "외래", "처방", "면역", "물리",
+}
+
+def _keywordstool(hint_string, api_key, secret_key, customer_id):
     ts = str(round(time.time() * 1000))
     sig = _sign(ts, "GET", KEYWORDSTOOL_URI, secret_key)
-    params = urllib.parse.urlencode({"hintKeywords": keyword.replace(" ", ""), "showDetail": 1})
+    params = urllib.parse.urlencode({"hintKeywords": hint_string, "showDetail": 1})
     req = urllib.request.Request(f"{SEARCHAD_BASE}{KEYWORDSTOOL_URI}?{params}")
     req.add_header("X-Timestamp", ts)
     req.add_header("X-API-KEY", api_key)
@@ -61,6 +76,28 @@ def get_keywords(keyword, api_key, secret_key, customer_id):
     req.add_header("X-Signature", sig)
     with urllib.request.urlopen(req, timeout=10) as r:
         return json.loads(r.read().decode())
+
+def get_keywords(keyword, api_key, secret_key, customer_id):
+    return _keywordstool(keyword.replace(" ", ""), api_key, secret_key, customer_id)
+
+def get_keywords_multi(seeds, api_key, secret_key, customer_id):
+    """여러 시드 키워드로 조회 후 relKeyword 기준 병합·중복 제거."""
+    merged = {}
+    for i in range(0, len(seeds), 5):  # keywordstool은 한 번에 최대 5개
+        chunk = [s.replace(" ", "") for s in seeds[i:i + 5]]
+        try:
+            data = _keywordstool(",".join(chunk), api_key, secret_key, customer_id)
+        except Exception:
+            continue
+        for row in data.get("keywordList", []):
+            rk = row.get("relKeyword", "")
+            if rk and rk not in merged:
+                merged[rk] = row
+        time.sleep(0.1)
+    return {"keywordList": list(merged.values())}
+
+def is_medical(text):
+    return any(v in text for v in MEDICAL_VOCAB)
 
 def parse_cnt(v):
     if isinstance(v, (int, float)):
@@ -157,37 +194,57 @@ def analyze(payload):
     ak = payload.get("ad_key", "").strip()
     asec = payload.get("ad_secret", "").strip()
     cust = payload.get("customer", "").strip()
+    domain = payload.get("domain", "all")
 
     if payload.get("save_keys"):
         save_config({"cid": cid, "secret": sec, "ad_key": ak, "ad_secret": asec, "customer": cust})
 
-    result = {"keyword": kw, "search": None, "blog": None, "related": [], "recommend": [], "errors": []}
+    result = {"keyword": kw, "domain": domain, "search": None, "blog": None,
+              "related": [], "recommend": [], "errors": []}
 
-    # 검색량
+    # 검색량 + 연관 키워드
     if ak and asec and cust:
         try:
-            data = get_keywords(kw, ak, asec, cust)
-            kwlist = data.get("keywordList", [])
             target = kw.replace(" ", "")
+            if domain == "medical":
+                # 입력 키워드 × 의료 의도 키워드 조합으로 도메인 특화 조회
+                seeds = [kw] + [f"{kw} {m}" for m in MEDICAL_MODIFIERS]
+                data = get_keywords_multi(seeds, ak, asec, cust)
+            else:
+                data = get_keywords(kw, ak, asec, cust)
+            kwlist = data.get("keywordList", [])
+
             row = next((r for r in kwlist if r.get("relKeyword", "").replace(" ", "") == target), None)
-            if row is None and kwlist:
-                row = kwlist[0]
+            if row is None:
+                # 멀티 조회엔 본 키워드가 없을 수 있어 단건 조회로 보강
+                try:
+                    single = get_keywords(kw, ak, asec, cust).get("keywordList", [])
+                    row = next((r for r in single if r.get("relKeyword", "").replace(" ", "") == target), None)
+                    if row is None and single:
+                        row = single[0]
+                except Exception:
+                    row = kwlist[0] if kwlist else None
             if row:
                 pc = parse_cnt(row.get("monthlyPcQcCnt", 0))
                 mo = parse_cnt(row.get("monthlyMobileQcCnt", 0))
                 result["search"] = {"pc": pc, "mobile": mo, "total": pc + mo}
 
-            # 연관 키워드
+            # 연관 키워드 (도메인이면 의료 어휘로 필터)
             related = []
-            for r in kwlist[:20]:
+            for r in kwlist:
                 rk = r.get("relKeyword", "")
+                if rk.replace(" ", "") == target:
+                    continue
+                if domain == "medical" and not is_medical(rk):
+                    continue
                 rpc = parse_cnt(r.get("monthlyPcQcCnt", 0))
                 rmo = parse_cnt(r.get("monthlyMobileQcCnt", 0))
                 rtotal = rpc + rmo
                 if rtotal < 50:
                     continue
                 related.append({"keyword": rk, "pc": rpc, "mobile": rmo, "total": rtotal})
-            result["related"] = related
+            related.sort(key=lambda x: x["total"], reverse=True)
+            result["related"] = related[:20]
         except Exception as e:
             result["errors"].append(f"검색광고 API: {e}")
 
@@ -276,6 +333,13 @@ def build_html(config):
   .btn:hover {{ opacity: .9; }}
   .btn:active {{ transform: scale(.97); }}
   .btn:disabled {{ opacity: .5; cursor: default; }}
+  .domain-btn {{
+    background: var(--card2); border: 1px solid var(--border); color: var(--sub);
+    border-radius: 8px; padding: 8px 18px; font-size: 0.88rem; font-weight: 600;
+    cursor: pointer; transition: all .2s;
+  }}
+  .domain-btn:hover {{ border-color: var(--accent); }}
+  .domain-btn.active {{ background: linear-gradient(135deg,#6366f1,#8b5cf6); color: #fff; border-color: transparent; }}
   .save-row {{ display: flex; align-items: center; gap: 8px; margin-top: 12px; }}
   .save-row input {{ width: auto; }}
   .save-row label {{ margin: 0; color: var(--sub); font-size: 0.82rem; }}
@@ -377,6 +441,10 @@ def build_html(config):
   <!-- 키워드 입력 -->
   <div class="card">
     <div class="card-title">키워드 입력</div>
+    <div style="display:flex; gap:8px; margin-bottom:12px;">
+      <button class="domain-btn active" data-domain="all" onclick="setDomain('all')">🌐 전체</button>
+      <button class="domain-btn" data-domain="medical" onclick="setDomain('medical')">🏥 병의원</button>
+    </div>
     <div class="keyword-row">
       <input type="text" id="keyword" placeholder="분석할 키워드를 입력하세요" onkeydown="if(event.key==='Enter')analyze()">
       <button class="btn" id="analyze-btn" onclick="analyze()">
@@ -384,6 +452,9 @@ def build_html(config):
         <div class="spinner"></div>
       </button>
     </div>
+    <p id="domain-hint" style="display:none; font-size:0.8rem; color:var(--sub); margin-top:10px;">
+      🏥 병의원 모드: 입력 키워드를 병원·치료·증상·비용·후기 등과 조합해 의료 도메인 연관·추천 키워드만 추려서 보여줍니다.
+    </p>
   </div>
 
   <!-- 결과 -->
@@ -491,6 +562,15 @@ function fmt(n) {{
   return Number(n).toLocaleString('ko-KR');
 }}
 
+let currentDomain = 'all';
+function setDomain(d) {{
+  currentDomain = d;
+  document.querySelectorAll('.domain-btn').forEach(b => {{
+    b.classList.toggle('active', b.dataset.domain === d);
+  }});
+  document.getElementById('domain-hint').style.display = d === 'medical' ? 'block' : 'none';
+}}
+
 function analyze() {{
   const kw = document.getElementById('keyword').value.trim();
   if (!kw) {{ alert('키워드를 입력하세요.'); return; }}
@@ -507,6 +587,7 @@ function analyze() {{
     ad_key: document.getElementById('ad_key').value.trim(),
     ad_secret: document.getElementById('ad_secret').value.trim(),
     customer: document.getElementById('customer').value.trim(),
+    domain: currentDomain,
     save_keys: document.getElementById('save_keys').checked,
   }};
 
